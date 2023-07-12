@@ -5,8 +5,10 @@
 package jrame._phanhoanghuy_t8;
 
 import java.awt.List;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import static java.util.Collections.list;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -35,6 +37,8 @@ public class bai11 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btn_sc = new javax.swing.JButton();
@@ -50,6 +54,10 @@ public class bai11 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         list_ptu = new javax.swing.JList<>();
         btn_dong = new javax.swing.JButton();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -155,11 +163,6 @@ public class bai11 extends javax.swing.JFrame {
             }
         });
 
-        txt_nhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nhapActionPerformed(evt);
-            }
-        });
         txt_nhap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_nhapKeyPressed(evt);
@@ -261,6 +264,8 @@ public class bai11 extends javax.swing.JFrame {
     private void txt_nhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nhapKeyPressed
         // TODO add your handling code here:
         char kt = evt.getKeyChar();
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+//            btn_nhap.doClick();
         if (chb_am.isSelected()){
             if (!Character.isDigit(kt) && !Character.isISOControl(kt) && kt != '-'){
                 txt_nhap.setEditable(false);
@@ -274,6 +279,7 @@ public class bai11 extends javax.swing.JFrame {
             else
                 txt_nhap.setEditable(true);
         }
+        
     }//GEN-LAST:event_txt_nhapKeyPressed
     
     
@@ -291,9 +297,17 @@ public class bai11 extends javax.swing.JFrame {
     private void btn_nhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nhapMouseClicked
         try{
             int ptu = Integer.parseInt(txt_nhap.getText());
+            // kiểm tra ptu đã tồn tại hay chưa
+            for (int i: arrInt){
+                if (ptu == i){
+                    JOptionPane.showMessageDialog(rootPane, "Đã tồn tại giá trị trong bảng.");
+                    txt_nhap.setText("");
+                    txt_nhap.requestFocus();
+                    return;
+                }
+            }
             arrInt.add(ptu);
             CapnhatList();
-
             txt_nhap.setText("");
             txt_nhap.requestFocus();
         }
@@ -302,12 +316,10 @@ public class bai11 extends javax.swing.JFrame {
             txt_nhap.requestFocus();
         }
         
+        
+        
+        
     }//GEN-LAST:event_btn_nhapMouseClicked
-
-    private void txt_nhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nhapActionPerformed
-        // TODO add your handling code here:
-        btn_nhap.doClick();
-    }//GEN-LAST:event_txt_nhapActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
@@ -459,6 +471,8 @@ public class bai11 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JList<String> list_ptu;
     private javax.swing.JTextField txt_nhap;
     // End of variables declaration//GEN-END:variables
